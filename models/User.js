@@ -36,6 +36,9 @@ const userSchema = new Schema({
   },
   contactInfo: {
     type: String,
+  },
+  description: {
+    type: String,
   }
 },
   {
