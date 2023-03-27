@@ -30,6 +30,16 @@ const knowledgeSchema = new Schema (
             type: String,
             required: [true, "Title is required."],
         },
+        knowledgeImage: {
+            type: String,
+            default:"https://thumbs.dreamstime.com/z/conexi%C3%B3n-del-cerebro-32729762.jpg",
+            required: [true, "Image is required."],
+        },
+        time: {
+            type: Number,
+            default: 0,
+            required: [true, "Time in hours approximately is required."]
+        }
     },
 
     {
