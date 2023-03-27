@@ -5,7 +5,7 @@ const knowledgeSchema = new Schema (
     {
         knowledge: [
             {
-                rol: {
+                category: {
                     type: String,
                     enum: [
                         "Music",
@@ -18,7 +18,7 @@ const knowledgeSchema = new Schema (
                         "Animals",
                         "Others",
                     ],
-                    required: [true, "Rol is required"],
+                    required: [true, "Category is required"],
                 },
                 users: {
                     type: [Schema.Types.ObjectId],
@@ -35,13 +35,46 @@ const knowledgeSchema = new Schema (
             default:"https://thumbs.dreamstime.com/z/conexi%C3%B3n-del-cerebro-32729762.jpg",
             required: [true, "Image is required."],
         },
-        time: {
+        timeOfActivity: {
             type: Number,
             default: 0,
-            required: [true, "Time in hours approximately is required."]
+            required: [true, "Time in hours and/or minutes approximately is required."]
+        },
+        startDate: {
+            type: Date,
+        },
+        endDate: {
+            type: Date,
+        },
+        location: [
+            {
+                country: {
+                    type: String,
+                    default: "Spain",
+                    required: [true, "Country is required."],
+                },
+                city: {
+                    type: String,
+                    default: "Barcelona",
+                    required: [true, "City is required."],
+                },
+                where: {
+                    type: String,
+                    default: "Outside",
+                    enum: [
+                        "At Home",
+                        "Outside",
+                        "WorkShop",
+                    ],
+                    required: [true, "The place where will be is required."],
+                },
+            },
+        ],
+        description: {
+            type: String,
+            required: [true, "Description is required."]
         }
     },
-
     {
         timestamps: true
     },
