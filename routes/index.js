@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-// @desc    Index page for the API
+// @desc    Get all the knowledge
 // @route   GET /
 // @access  Public
 router.get('/', async (req, res, next) => {;
