@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Knowledge = require("../models/Knowledge");
 const User = require("../models/User");
 const { isAuthenticated } = require('../middlewares/jwt');
+const ErrorResponse = require('../utils/error');
 
 // @desc    GET all the knowledges
 // @route   GET /api/v1/knowledge
@@ -35,6 +36,5 @@ router.get('/:id', isAuthenticated, async (req, res, next) => {
         next(error);
     }
 });
-
 
 module.exports = router;
