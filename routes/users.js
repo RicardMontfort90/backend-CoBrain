@@ -1,9 +1,10 @@
+/*
 const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 const Review = require('../models/Review');
 const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
-const ErrorResponse = require('../utils/error');
+
 
 // @desc    Edit User
 // @route   PUT /api/v1/
@@ -46,3 +47,5 @@ router.delete('/', isAuthenticated, async (req, res, next) => {
 });
 
 module.exports = router;
+
+*/

@@ -5,11 +5,11 @@ const userSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    required: [true,"Email is required."],
+    required: true
   },
   hashedPassword: {
     type: String,
-    required: [true, "Password ir required."],
+    required: true
   },
   username: {
     type: String,
@@ -20,6 +20,7 @@ const userSchema = new Schema({
     enum: ['user', 'admin'],
     default: 'user'
   },
+  /*
   profileImage: {
     type: String,
     default: "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
@@ -40,6 +41,7 @@ const userSchema = new Schema({
   description: {
     type: String,
   }
+  */
 },
   {
     timestamps: true

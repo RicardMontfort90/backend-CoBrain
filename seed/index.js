@@ -1,9 +1,9 @@
-require('dotenv').config();
+/* require('dotenv').config();
 const mongoose = require('mongoose');
 // Import the model
-const Knowledge = require('../models/Knowledge');
+/*const Knowledge = require('../models/Knowledge'); */
 // Place the array you want to seed
-
+/*
 const knowledges = [
   {
     knowledge: [
@@ -28,11 +28,37 @@ const knowledges = [
   }
 ]
 
+
 mongoose.connect(process.env.MONGO_URL)
   .then(x => console.log(`Connected to ${x.connection.name}`))
   .then(() => {
     // return Model.create(array)
-    return Knowledge.create(knowledges)
+    return  /* Knowledge.create(knowledges) 
+  })
+  .then(() => {
+    console.log('Seed done 🌱');
+  })
+  .catch(e => console.log(e))
+  .finally(() => {
+    console.log('Closing connection');
+    mongoose.connection.close();
+  })
+
+// Run npm run seed */
+
+
+
+
+require('dotenv').config();
+const mongoose = require('mongoose');
+// Import the model
+
+// Place the array you want to seed
+
+mongoose.connect(process.env.MONGO_URL)
+  .then(x => console.log(`Connected to ${x.connection.name}`))
+  .then(() => {
+    return // Model.create(array)
   })
   .then(() => {
     console.log('Seed done 🌱');

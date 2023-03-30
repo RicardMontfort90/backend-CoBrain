@@ -1,8 +1,9 @@
+/*
 const router = require('express').Router();
 const Knowledge = require("../models/Knowledge");
 const User = require("../models/User");
 const { isAuthenticated } = require('../middlewares/jwt');
-const ErrorResponse = require('../utils/error');
+
 
 // @desc    GET all the knowledges
 // @route   GET /api/v1/knowledge
@@ -10,8 +11,8 @@ const ErrorResponse = require('../utils/error');
 router.get('/', isAuthenticated, async (req, res, next) => {
     try {
         const knowledges = await Knowledge.find({});
-            if(!bikes) {
-                return next(new ErrorResponse('No bikes found', 204));
+            if(!knowledges) {
+                return next(new ErrorResponse('No knowledges found', 204));
             } 
             res.status(200).json({ data: knowledges })
         } 
@@ -20,7 +21,7 @@ router.get('/', isAuthenticated, async (req, res, next) => {
         }
 });
 
-// @desc    GET single bike
+// @desc    GET single knowledge
 // @route   GET /api/v1/
 // @access  Public
 router.get('/:id', isAuthenticated, async (req, res, next) => {
@@ -38,3 +39,5 @@ router.get('/:id', isAuthenticated, async (req, res, next) => {
 });
 
 module.exports = router;
+
+*/
