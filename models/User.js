@@ -20,12 +20,11 @@ const userSchema = new Schema({
     enum: ['user', 'admin'],
     default: 'user'
   },
-  /*
   profileImage: {
     type: String,
     default: "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
   },
-  skills: {
+  skills: { // REMOVE FIELD
     type: String,
     required: [true, "Skills is required"]
   },
@@ -41,7 +40,7 @@ const userSchema = new Schema({
   description: {
     type: String,
   }
-  */
+  
 },
   {
     timestamps: true

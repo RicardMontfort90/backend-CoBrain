@@ -10,6 +10,7 @@ const saltRounds = 10;
 // @access  Public
 router.post('/signup', async (req, res, next) => {
   const { email, password, username } = req.body;
+  // ADD MISSING FIELDS FROM USER MODEL EXCEPT ROLE
   // Check if email or password or name are provided as empty string 
   if (email === "" || password === "" || username === "") {
     res.status(400).json({ message: 'Please fill all the fields to register' });
@@ -47,7 +48,7 @@ router.post('/signup', async (req, res, next) => {
 // @route   POST /api/v1/auth/login
 // @access  Public
 router.post('/login', async (req, res, next) => { 
-  console.log(req.headers);
+  console.log(req.headers); // REMOVE
   const { email, password } = req.body;
   // Check if email or password are provided as empty string 
   if (email === "" || password === "") {
@@ -65,7 +66,7 @@ router.post('/login', async (req, res, next) => {
       const passwordMatches = bcrypt.compareSync(password, userInDB.hashedPassword);
       if (passwordMatches) {
         // Let's create what we want to store in the jwt token
-        const payload = {
+        const payload = { // ADD MISSING FIELDS FROM USER MODEL
           email: userInDB.email,
           username: userInDB.username,
           role: userInDB.role,

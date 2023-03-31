@@ -1,20 +1,17 @@
-/*
+
 const router = require('express').Router();
 const Review = require('../models/Review');
 const { isAuthenticated } = require('../middlewares/jwt')
-const ErrorResponse = require('../utils/error');
+
 
 
 // @desc    GET all the review
-// @route   GET /api/v1/
+// @route   GET /reviews
 // @access  Public
 router.get('/', isAuthenticated , async (req, res, next) => {
     try {
-        const reviews = await Review.find({});
-        if(!reviews.length) {
-            return next(new ErrorResponse('No reviews found', 204));
-        } 
-        res.status(200).json({ data: reviews })
+        const reviews = await Review.find();
+        res.status(200).json(reviews)
     } 
     catch (error) {
         next(error);
@@ -23,15 +20,12 @@ router.get('/', isAuthenticated , async (req, res, next) => {
 
 
 // @desc    GET my reviews
-// @route   GET /api/v1/
+// @route   GET /mine
 // @access  Public
 router.get('/mine', isAuthenticated , async (req, res, next) => {
     try {
         const reviews = await Review.find({userId: req.payload._id});
-        if(!reviews.length) {
-            return next(new ErrorResponse('No reviews found', 204));
-        } 
-        res.status(200).json({ data: reviews })
+        res.status(200).json(reviews)
     } 
     catch (error) {
         next(error);
@@ -39,16 +33,13 @@ router.get('/mine', isAuthenticated , async (req, res, next) => {
 });
 
 // @desc    GET single review
-// @route   GET /api/v1/
+// @route   GET /reviews/:reviewId
 // @access  Public
-router.get('/:id', isAuthenticated , async (req, res, next) => {
-    const { id } = req.params;
+router.get('/:reviewId', isAuthenticated , async (req, res, next) => {
+    const { reviewId } = req.params;
     try {
         const review = await Review.findById(id);
-        if(!review) {
-            return next(new ErrorResponse('Review not found', 404));
-        } 
-            res.status(200).json({ data: review })
+            res.status(200).json(review)
     } 
     catch (error) {
         next(error);
@@ -56,28 +47,14 @@ router.get('/:id', isAuthenticated , async (req, res, next) => {
 });
 
 
-// @desc    Upload a picture to Cloudinary
-// @route   POST /api/v1/review/upload
-// @access  Public
-router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
-    if (!req.file) {
-        next(new ErrorResponse('Error uploading the image', 500));
-        return;
-    }
-    res.json({ fileUrl: req.file.path });
-});
-
 // @desc    Create a review
-// @route   POST /api/v1/review
+// @route   POST /reviews
 // @access  Public
 router.post('/', isAuthenticated, async (req, res, next) => {
     const { imageUrl, title, description } = req.body;
     const userId = req.payload._id;
     try {
         const review = await Review.create({ userId: userId, imageUrl, title, description });
-        if(!review) {
-            return next(new ErrorResponse('A error ocurred while creating the review', 500));
-        } 
         res.status(201).json({ data: review })
     } 
     catch (error) {
@@ -86,43 +63,31 @@ router.post('/', isAuthenticated, async (req, res, next) => {
 });
 
 // @desc    Edit a review
-// @route   PUT /api/v1/
+// @route   PUT /reviews/:reviewId
 // @access  Public
 router.put('/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
     const { image, title, description } = req.body;
     try {
         const review = await Review.findById(id);
-        if(!review) {
-            return next(new ErrorResponse(`Review not found by ${id}`, 404));
-        } 
-        else {
             const updatedReview = await Review.findByIdAndUpdate(id, { image, title, description }, {new: true});
             res.status(202).json({ data: updatedReview })
-        }
     } catch (error) {
         next(error);
     }
 });
 
 // @desc    Delete a review
-// @route   DELETE /api/v1/
+// @route   DELETE 
 // @access  Public
-router.delete('/:id', isAuthenticated, async (req, res, next) => {
-    const { id } = req.params;
+router.delete('/:reviewId', isAuthenticated, async (req, res, next) => {
+    const { reviewId } = req.params;
     try {
-        const review = await Review.findById(id);
-        if(!review) {
-            return next(new ErrorResponse(`Review not found by ${id}`, 404));
-        } 
-        else {
-            const deleted = await Review.findByIdAndDelete(id);
-            res.status(202).json({ data: deleted })
-        }
+      const deletedReview = await Review.findByIdAndDelete(reviewId);
+      res.status(200).json(deletedReview);
     } catch (error) {
-        next(error);
+      next(error)
     }
 });
 
 module.exports = router;
-*/

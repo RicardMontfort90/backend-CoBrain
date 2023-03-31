@@ -3,25 +3,25 @@ const { Schema, model } = mongoose;
 
 const knowledgeSchema = new Schema (
     {
-                category: {
-                    type: String,
-                    enum: [
-                        "Music",
-                        "Cooking",
-                        "Health",
-                        "Sport",
-                        "Crafts",
-                        "Circus",
-                        "Languages",
-                        "Animals",
-                        "Others",
-                    ],
-                    required: [true, "Category is required"],
-                },
-                user: {
-                    type: Schema.Types.ObjectId,
-                    red: "User",
-                },
+        category: {
+            type: String,
+            enum: [
+                "Music",
+                "Cooking",
+                "Health",
+                "Sport",
+                "Crafts",
+                "Circus",
+                "Languages",
+                "Animals",
+                "Others",
+            ],
+            required: [true, "Category is required"],
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            red: "User",
+        },
         title: {
             type: String,
             required: [true, "Title is required."],
