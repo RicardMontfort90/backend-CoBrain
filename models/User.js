@@ -24,10 +24,6 @@ const userSchema = new Schema({
     type: String,
     default: "https://www.nicepng.com/png/full/933-9332131_profile-picture-default-png.png"
   },
-  skills: { // REMOVE FIELD
-    type: String,
-    required: [true, "Skills is required"]
-  },
   country: {
     type: String,
   },
