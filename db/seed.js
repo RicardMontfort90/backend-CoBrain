@@ -1,10 +1,10 @@
-/*
 require('dotenv').config();
 const mongoose = require('mongoose');
-// Import the model
+mongoose.set('strictQuery', true);
 const Knowledge = require('../models/Knowledge');
-// Place the array you want to seed
-const knowledges = [{
+
+const knowledges = [
+{
     "category": "Music",
     "userId": "User",         
     "title": "Piano's teacher",
@@ -12,22 +12,24 @@ const knowledges = [{
     "timeOfActivity": "1h",
     "location": "Barcelona",
     "description": "Hey! I'm a piano teacher who wants to change my time to try to learn Greek, so We can try to spend are hours and change are knowledge!",
-  }]
+}]
 
 mongoose.connect(process.env.MONGO_URL)
-  .then(x => console.log(`Connected to ${x.connection.name}`))
-  .then(() => {
-    return Knowledge.create(knowledges) // Model.create(array) 
-  })
-  .then(() => {
-    console.log('Seed done 🌱');
-  })
-  .catch(e => console.log(e))
-  .finally(() => {
-    console.log('Closing connection');
-    mongoose.connection.close();
-  })
-
-// Run npm run seed 
-
-*/
+.then((x) => {
+    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
+})
+.then(() => {
+    return Knowledge.deleteMany({})
+})
+.then(() => {
+    return Knowledge.create(knowledges)
+})
+.then((created) => {
+    console.log(`Created ${created.length} knowledges`)
+})
+.catch((err) => {
+    console.error("Error connecting to mongo: ", err);
+})
+.finally(() => {
+    mongoose.connection.close()
+})

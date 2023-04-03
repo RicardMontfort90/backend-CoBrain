@@ -18,9 +18,10 @@ const knowledgeSchema = new Schema (
             ],
             required: [true, "Category is required"],
         },
-        user: {
+        userId: {
             type: Schema.Types.ObjectId,
             red: "User",
+            required: true
         },
         title: {
             type: String,

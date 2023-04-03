@@ -1,9 +1,6 @@
-
 const router = require('express').Router();
 const Review = require('../models/Review');
-const { isAuthenticated } = require('../middlewares/jwt')
-
-
+const { isAuthenticated, isAdmin } = require('../middlewares/jwt')
 
 // @desc    GET all the review
 // @route   GET /reviews
@@ -22,7 +19,7 @@ router.get('/', isAuthenticated , async (req, res, next) => {
 // @desc    GET my reviews
 // @route   GET /mine
 // @access  Public
-router.get('/mine', isAuthenticated , async (req, res, next) => {
+router.get('/mine', isAuthenticated, isAdmin, async (req, res, next) => {
     try {
         const reviews = await Review.find({userId: req.payload._id});
         res.status(200).json(reviews)
@@ -35,10 +32,10 @@ router.get('/mine', isAuthenticated , async (req, res, next) => {
 // @desc    GET single review
 // @route   GET /reviews/:reviewId
 // @access  Public
-router.get('/:reviewId', isAuthenticated , async (req, res, next) => {
+router.get('/:reviewId', isAuthenticated, isAdmin, async (req, res, next) => {
     const { reviewId } = req.params;
     try {
-        const review = await Review.findById(id);
+        const review = await Review.findById(reviewId);
             res.status(200).json(review)
     } 
     catch (error) {
@@ -50,7 +47,7 @@ router.get('/:reviewId', isAuthenticated , async (req, res, next) => {
 // @desc    Create a review
 // @route   POST /reviews
 // @access  Public
-router.post('/', isAuthenticated, async (req, res, next) => {
+router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
     const { imageUrl, title, description } = req.body;
     const userId = req.payload._id;
     try {
@@ -64,29 +61,29 @@ router.post('/', isAuthenticated, async (req, res, next) => {
 
 // @desc    Edit a review
 // @route   PUT /reviews/:reviewId
-// @access  Public
-router.put('/:id', isAuthenticated, async (req, res, next) => {
+// @access  Private
+router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
     const { id } = req.params;
     const { image, title, description } = req.body;
     try {
         const review = await Review.findById(id);
             const updatedReview = await Review.findByIdAndUpdate(id, { image, title, description }, {new: true});
-            res.status(202).json({ data: updatedReview })
+            res.status(202).json({ data: review, updatedReview })
     } catch (error) {
         next(error);
     }
 });
 
 // @desc    Delete a review
-// @route   DELETE 
-// @access  Public
-router.delete('/:reviewId', isAuthenticated, async (req, res, next) => {
+// @route   DELETE /reviews/:reviewId
+// @access  Private
+router.delete('/:reviewId', isAuthenticated, isAdmin, async (req, res, next) => {
     const { reviewId } = req.params;
     try {
-      const deletedReview = await Review.findByIdAndDelete(reviewId);
-      res.status(200).json(deletedReview);
+        const deletedReview = await Review.findByIdAndDelete(reviewId);
+        res.status(200).json(deletedReview);
     } catch (error) {
-      next(error)
+        next(error)
     }
 });
 

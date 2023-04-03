@@ -28,16 +28,12 @@ router.put('/edit', isAuthenticated, async (req, res, next) => {
 router.delete('/delete', isAuthenticated, async (req, res, next) => {
     const userId = req.payload._id;
     try {
-        const user = await User.findById(userId);
-        if(!user) {
-            return next(new ErrorResponse(`User not found by ${userId}`, 404));
-        } else {
-            const deletedReview = await Review.deleteMany({userId});
-            // REMOVE KNOWLEDGES FROM USER
-            const deletedUser = await User.findByIdAndDelete(userId);
-            res.status(202).json({ data: deletedReview, deletedUser }) // INSTEAD OF DATA, JUST MESSAGE: USER DELETED SUCCESFULLY
-        }
-    } catch (error) {
+        
+        const deletedUser = await User.findByIdAndDelete(userId);
+        const deletedReview = await Review.deleteMany({userId});
+        res.status(202).json({data: deletedUser && deletedReview, message: "Deleted"});
+    }
+    catch (error) {
         next(error);
     }
 });

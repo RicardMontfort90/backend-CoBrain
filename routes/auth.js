@@ -2,11 +2,11 @@ const router = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
+const { isAuthenticated } = require('../middlewares/jwt');
 const saltRounds = 10;
 
 // @desc    SIGN UP new user
-// @route   POST /api/v1/auth/signup
+// @route   POST /auth/signup
 // @access  Public
 router.post('/signup', async (req, res, next) => {
   const { email, password, username } = req.body;
@@ -45,10 +45,9 @@ router.post('/signup', async (req, res, next) => {
 });
 
 // @desc    LOG IN user
-// @route   POST /api/v1/auth/login
+// @route   POST /auth/login
 // @access  Public
 router.post('/login', async (req, res, next) => { 
-  console.log(req.headers); // REMOVE
   const { email, password } = req.body;
   // Check if email or password are provided as empty string 
   if (email === "" || password === "") {
@@ -90,7 +89,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 // @desc    GET logged in user
-// @route   GET /api/v1/auth/me
+// @route   GET auth/me
 // @access  Private
 router.get('/me', isAuthenticated, (req, res, next) => {
   // If JWT token is valid the payload gets decoded by the
