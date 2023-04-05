@@ -7,7 +7,6 @@ const Favorite = require('../models/Favorite');
 // @route   GET /mine
 // @access  Public
 router.get('/', isAuthenticated, async (req, res, next) => {
-    console.log("hi there")
     const userId = req.payload._id;
     try {
         const favorites = await Favorite.find({userId: userId}).populate("knowledgeId"); // 

@@ -39,11 +39,12 @@ const knowledgeSchema = new Schema (
         },
         location: {
             type: String,
+        },
         description: {
             type: String,
             required: [true, "Description is required."]
-        }
-    },
+        },
+    
 },
     {
         timestamps: true
