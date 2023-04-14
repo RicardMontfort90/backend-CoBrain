@@ -44,6 +44,10 @@ const knowledgeSchema = new Schema (
             type: String,
             required: [true, "Description is required."]
         },
+        contactMe: {
+            type: String,
+            required: [true, "Description is required."]
+        },
     
 },
     {
