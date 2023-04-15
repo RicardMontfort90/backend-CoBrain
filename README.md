@@ -1,7 +1,7 @@
 # Project's name REST API
 ## Description
 
-This is a the backend repository for the React application `app's name`.
+This is a the backend repository for the React application `CoBrain`.
 
 ---
 
@@ -36,13 +36,118 @@ npm run seed
 Users in the database have the following properties:
 
 ```js
-{
-  "username": String,
-  "email": String,
-  "hashedPassword": String
-}
-```
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+      required: true
+    },
+    hashedPassword: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String,
+      required: true 
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user'
+    },
+    profileImage: {
+      type: String,
+      default: ""
+    },
+    country: {
+      type: String,
+    },
+    city: {
+      type:String,
+    },
+    contactInfo: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true
+  }
+);
+
+module.exports = model("User", userSchema);
+```
+### Knowledge
+
+Knowledge in the database have the following properties:
+
+```js
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
+
+const knowledgeSchema = new Schema (
+    {
+        category: {
+            type: String,
+            enum: [
+                "Music",
+                "Cooking",
+                "Health",
+                "Sport",
+                "Crafts",
+                "Circus",
+                "Languages",
+                "Animals",
+                "Others",
+            ],
+            required: [true, "Category is required"],
+        },
+        userId: {
+            type: Schema.Types.ObjectId,
+            red: "User",
+            required: true
+        },
+        title: {
+            type: String,
+            required: [true, "Title is required."],
+        },
+        knowledgeImage: {
+            type: String,
+            default:"https://thumbs.dreamstime.com/z/conexi%C3%B3n-del-cerebro-32729762.jpg",
+            required: [true, "Image is required."],
+        },
+        timeOfActivity: {
+            type: Number,
+            default: 0,
+            required: [true, "Time in hours and/or minutes approximately is required."]
+        },
+        location: {
+            type: String,
+        },
+        description: {
+            type: String,
+            required: [true, "Description is required."]
+        },
+        contactMe: {
+            type: String,
+            required: [true, "Description is required."]
+        },
+    
+    },
+    {
+        timestamps: true
+    },
+);
+
+module.exports = model("Knowledge", knowledgeSchema); 
+
+```
 ---
 
 ## API endpoints and usage 

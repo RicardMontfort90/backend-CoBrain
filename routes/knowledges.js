@@ -14,9 +14,9 @@ router.get('/', isAuthenticated, async (req, res, next) => {
     }
 });
 
-  // @desc    Get one knowledge
-  // @route   GET /knowledges/:knowledgeId
-  // @access  Private
+// @desc    Get one knowledge
+// @route   GET /knowledges/:knowledgeId
+// @access  Private
 router.get('/:knowledgeId', isAuthenticated, async (req, res, next) => {
     const { knowledgeId } = req.params;
     try {
@@ -27,17 +27,15 @@ router.get('/:knowledgeId', isAuthenticated, async (req, res, next) => {
     }
 });
 
-  // @desc    Create one knowledge
-  // @route   POST /knowledge
-  // @access  Private
+// @desc    Create one knowledge
+// @route   POST /knowledge
+// @access  Private
 router.post('/', isAuthenticated, async (req, res, next) => { 
-
     const { category, title, knowledgeImage, timeOfActivity, location, description, contactMe } = req.body;
     if (!category === "" || !title === "" || !knowledgeImage === "" || !timeOfActivity === "" || !location === "" || !description === "" || !contactMe === ""  ) {
         res.status(400).json({message: "Please check your fields"})
         return;
     }
-
     const userId = req.payload._id;
     try {
         const newKnowledge = await Knowledge.create({ userId: userId, category, title, knowledgeImage, timeOfActivity, location, description, contactMe }); 
@@ -47,17 +45,14 @@ router.post('/', isAuthenticated, async (req, res, next) => {
     }
 });
 
-  // @desc    Edit one knowledge
-  // @route   PUT /knowledges/:knowledgeId
-  // @access  Private
-router.put('/:knowledgeId', isAuthenticated, async (req, res, next) => { // IS AUTHENTICATED
-   /* const userId = req.payload._id; */
+// @desc    Edit one knowledge
+// @route   PUT /knowledges/:knowledgeId
+// @access  Private
+router.put('/:knowledgeId', isAuthenticated, async (req, res, next) => { 
     const { knowledgeId } = req.params;
     const { category, title, knowledgeImage, timeOfActivity, location, description, contactMe } = req.body;
     try {
-        // CONST KNOWLEDGE = KNOWLEDGE.FINDBYID
-        // IF (KNOWLEDGE.USER !== REQ.PAYLOAD._ID) RETORNAR ERROR "UNAUTHORIZED TO EDIT"
-        const editKnowledge = await Knowledge.findByIdAndUpdate(knowledgeId, { /*userId: userId, */ category, title, knowledgeImage, timeOfActivity, location, description, contactMe }, { new: true }); // INSTEAD OF PASSING BODY GLOBALLY, DESTRUCTURE, CHECK ALL EXPECTED FIELDS ARE PRESENT, IF NOT RES.STATUS AND ERROR.
+        const editKnowledge = await Knowledge.findByIdAndUpdate(knowledgeId, { category, title, knowledgeImage, timeOfActivity, location, description, contactMe }, { new: true }); // INSTEAD OF PASSING BODY GLOBALLY, DESTRUCTURE, CHECK ALL EXPECTED FIELDS ARE PRESENT, IF NOT RES.STATUS AND ERROR.
         
         res.status(204).json({ data: editKnowledge, message: 'OK' });
     } catch (error) {
@@ -65,9 +60,9 @@ router.put('/:knowledgeId', isAuthenticated, async (req, res, next) => { // IS A
     }
 });
 
-  // @desc    Delete one knowledge
-  // @route   DELETE /knowledges/:knowledgesId
-  // @access  Private
+// @desc    Delete one knowledge
+// @route   DELETE /knowledges/:knowledgesId
+// @access  Private
 router.delete('/:knowledgeId', isAuthenticated, async (req, res, next) => {
     const { knowledgeId } = req.params;
     try {

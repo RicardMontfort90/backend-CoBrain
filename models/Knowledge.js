@@ -49,7 +49,7 @@ const knowledgeSchema = new Schema (
             required: [true, "Description is required."]
         },
     
-},
+    },
     {
         timestamps: true
     },

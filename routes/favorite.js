@@ -27,7 +27,7 @@ router.post('/:knowledgeId', isAuthenticated, async (req, res, next) => {
     const userId = req.payload._id;
     try {
         const knowledgeIsFavorite = await Favorite.find({userId:userId, knowledgeId:knowledgeId});
-        if (knowledgeIsFavorite.length === 0){ // if it's more than 0, return error saying "this is already favorite"
+        if (knowledgeIsFavorite.length === 0){ 
         const newFavorite = await Favorite.create({ userId: userId, knowledgeId: knowledgeId });
         res.status(201).json({ data: newFavorite})
         }

@@ -1,18 +1,15 @@
-
 const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 const Review = require('../models/Review');
 const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
-// REMOVED UNUSED VARIABLES
-// FINISH ROUTES DOCUMENTATION
 
 // @desc    Edit User
 // @route   PUT /users/edit
 // @access  User
 router.put('/edit', isAuthenticated, async (req, res, next) => {
     const userId = req.payload._id;
-    const { email, hashedPassword, username, profileImage, country, city, contactInfo, description } = req.body; // ADD MISSING FIELDS FROM USER MODEL
+    const { email, hashedPassword, username, profileImage, country, city, contactInfo, description } = req.body; 
     try {
         const updatedUser = await User.findByIdAndUpdate(userId, { email, hashedPassword, username, profileImage, country, city, contactInfo, description }, {new: true});
         res.status(202).json({ data: updatedUser })
@@ -28,7 +25,6 @@ router.put('/edit', isAuthenticated, async (req, res, next) => {
 router.delete('/delete', isAuthenticated, async (req, res, next) => {
     const userId = req.payload._id;
     try {
-        
         const deletedUser = await User.findByIdAndDelete(userId);
         const deletedReview = await Review.deleteMany({userId});
         res.status(202).json({data: deletedUser && deletedReview, message: "Deleted"});
