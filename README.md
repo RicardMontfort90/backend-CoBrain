@@ -36,9 +36,6 @@ npm run seed
 Users in the database have the following properties:
 
 ```js
-const mongoose = require("mongoose");
-const { Schema, model } = mongoose;
-
 const userSchema = new Schema(
   {
     email: {
@@ -80,17 +77,12 @@ const userSchema = new Schema(
     timestamps: true
   }
 );
-
-module.exports = model("User", userSchema);
 ```
 ### Knowledge
 
 Knowledge in the database have the following properties:
 
 ```js
-const mongoose = require("mongoose");
-const { Schema, model } = mongoose;
-
 const knowledgeSchema = new Schema (
     {
         category: {
@@ -144,10 +136,61 @@ const knowledgeSchema = new Schema (
         timestamps: true
     },
 );
-
-module.exports = model("Knowledge", knowledgeSchema); 
-
 ```
+
+### Review
+
+Review in the database have the following properties:
+
+```js
+const reviewSchema = new Schema(
+    {
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
+        imageUrl: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        }
+    }
+);
+```
+
+### Favorite
+
+Favorite in the database have the following properties:
+
+```js
+const favoriteSchema = new Schema(
+    {
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
+        knowledgeId: {
+            type: Schema.Types.ObjectId,
+            ref: "Knowledge",
+            required: true
+        }
+    },
+    {
+        timestamps: true
+    }
+);
+```
+
+
 ---
 
 ## API endpoints and usage 
