@@ -9,7 +9,7 @@ function getTokenFromHeaders(req) {
     return token;
   }
   return null;
-}
+};
 
 const isAuthenticated = jwt({
   secret: process.env.TOKEN_SECRET,
@@ -24,11 +24,10 @@ const isAdmin = (req, res, next) => {
   } else {
     res.status(401).json({ message: 'User is not admin'})
     return;
-  }
-}
+  };
+};
 
 module.exports = {
   isAuthenticated,
   isAdmin
-}
-
+};

@@ -47,11 +47,12 @@ Users in the database have the following properties:
 
 ## API endpoints and usage 
 
-| Action           | Method    | Endpoint             | Req.body                        | Private/Public |
-|------------------|-----------|----------------------|---------------------------------|-----------------|
-| SIGN UP user     | POST      | /api/v1/auth/signup  | { username, email, password }   |    Public |                 
-| LOG IN user      | POST      | /api/v1/auth/login   | { email, password }             |    Public |                  
-| GET logged in user   | GET     | /api/v1/auth/me    |   | Private |
+| Action               | Method    | Endpoint             | Req.body                        |    Private/Public |
+|------------------    |-----------|----------------------|---------------------------------|-----------------|
+| SIGN UP user         | POST      | /auth/signup         | { username, email, password }   |      Public |                 
+| LOG IN user          | POST      | /auth/login          | { email, password }             |      Public |                  
+| GET logged in user   | GET       | /auth/me             |                                 |    Private |
+| GET all knowledges   | GET       | /                    |  |
 
 ---
 
