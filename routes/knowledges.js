@@ -5,7 +5,7 @@ const { isAuthenticated } = require('../middlewares/jwt')
 // @desc    Get all knowledges
 // @route   GET /knowledges
 // @access  Public
-router.get('/', isAuthenticated, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const knowledges = await Knowledge.find();
         res.status(200).json(knowledges);
