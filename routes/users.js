@@ -6,7 +6,7 @@ const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
 
 // @desc    Edit User
 // @route   PUT /users/edit
-// @access  User
+// @access  Private
 router.put('/edit', isAuthenticated, async (req, res, next) => {
     const userId = req.payload._id;
     const { email, hashedPassword, username, profileImage, country, city, contactInfo, description } = req.body; 

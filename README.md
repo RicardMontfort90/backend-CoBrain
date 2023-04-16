@@ -204,8 +204,13 @@ const favoriteSchema = new Schema(
 | GET all knowledges  | GET  | /knowledges/              |                                   |      Public       |
 | GET one knowledge   | GET  | /knowledges/:knowledgeId  |                                   |      Private      |
 | POST one knowledge  | POST | /knowledges/              |                                   |      Private      |
-|EDIT konwledge|PUT|/knowledges/:knowledgeId|{category,title,knowledgeImage,timeOfActivity,location,description,contactMe}|Private|
+| EDIT konwledge | PUT| /knowledges/:knowledgeId| {category,title,knowledgeImage,timeOfActivity,location,description,contactMe}| Private|
 |DELETE knowledge     |DELETE| /knowledges/:knowledgeId  |                                   |      Private      |
+|                                                                                                                |
+| EDIT User | PUT| /users/edit| {email,hashedPassword,username,profileImage,country,city,contactInfo,description}| Private|
+| DELETE User         |DELETE| /users/delete             |                                   |      Private      |
+| DELETE User (Admin) |DELETE| /users/:userId/delete     |                                   |   Private/admin   |
+
 
 
 
