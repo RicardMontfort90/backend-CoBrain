@@ -204,9 +204,8 @@ const favoriteSchema = new Schema(
 | GET one knowledge    | GET       | /knowledge/:knowledgeId   |                                   |      Private      |
 | POST one knowledge   | POST      | /knowledge/               |                                   |      Private      |
 | Edit one konwledge   | PUT       | /knowledge/:knowledgeId   |{ category, title, knowledgeImage, |                   |
-|                      |           |                           |     timeOfActivity, location,     |                   |
-|                      |           |                           |      description, contactMe }     |                   |
-
+                                                                timeOfActivity, location,                       
+                                                                description, contactMe }                        
 ---
 
 ## Useful links
