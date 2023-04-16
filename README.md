@@ -210,6 +210,8 @@ const favoriteSchema = new Schema(
 | EDIT User | PUT| /users/edit| {email,hashedPassword,username,profileImage,country,city,contactInfo,description}| Private|
 | DELETE User         |DELETE| /users/delete             |                                   |      Private      |
 | DELETE User (Admin) |DELETE| /users/:userId/delete     |                                   |   Private/admin   |
+|                                                                                                                |
+|
 
 
 
