@@ -195,15 +195,19 @@ const favoriteSchema = new Schema(
 
 ## API endpoints and usage 
 
-| Action               |Method| Endpoint                  | Req.body                          |    Private/Public |
+| Action              |Method| Endpoint                  | Req.body                          |Private/Public     |
 |---------------------|------|----------------------     |---------------------------------  |-----------------  |
 | SIGN UP user        | POST | /auth/signup              | { username, email, password }     |      Public       |                 
 | LOG IN user         | POST | /auth/login               | { email, password }               |      Public       |                  
 | GET logged in user  | GET  | /auth/me                  |                                   |      Private      |
-| GET all knowledges  | GET  | /knowledge/               |                                   |      Public       |
-| GET one knowledge   | GET  | /knowledge/:knowledgeId   |                                   |      Private      |
-| POST one knowledge  | POST | /knowledge/               |                                   |      Private      |
-|Edit one konwledge|PUT|/knowledge/:knowledgeId|{category,title,knowledgeImage,timeOfActivity,location,description,contactMe}|Private|
+|                                                                                                                |
+| GET all knowledges  | GET  | /knowledges/              |                                   |      Public       |
+| GET one knowledge   | GET  | /knowledges/:knowledgeId  |                                   |      Private      |
+| POST one knowledge  | POST | /knowledges/              |                                   |      Private      |
+|EDIT konwledge|PUT|/knowledges/:knowledgeId|{category,title,knowledgeImage,timeOfActivity,location,description,contactMe}|Private|
+|DELETE knowledge     |DELETE| /knowledges/:knowledgeId  |                                   |      Private      |
+
+
 
 ---
 
