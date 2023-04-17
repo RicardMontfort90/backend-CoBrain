@@ -213,15 +213,11 @@ const favoriteSchema = new Schema(
 |                                                                                                                |
 |
 
-
-
-
 ---
 
 ## Useful links
 
-- [Presentation slides]()
-- [Frontend repository]()
-- [Frontend deploy]()
-- [Deployed REST API]()
-
+- [Presentation slides](https://slides.com/ricardmontfortromero/cobrain/edit)
+- [Frontend repository](https://github.com/RicardMontfort90/frontend-template-m3)
+- [Frontend deploy](https://github.com/RicardMontfort90/frontend-template-m3)
+- [Deployed REST API](https://cobrain.netlify.app/)
