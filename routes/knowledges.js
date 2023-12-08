@@ -49,6 +49,7 @@ router.post('/', isAuthenticated, async (req, res, next) => {
 // @route   PUT /knowledges/:knowledgeId
 // @access  Private
 router.put('/:knowledgeId', isAuthenticated, async (req, res, next) => { 
+    
     const { knowledgeId } = req.params;
     const { category, title, knowledgeImage, timeOfActivity, location, description, contactMe } = req.body;
     try {

@@ -1,12 +1,16 @@
-const express = require('express');
+/*
 const router = express.Router();
+const express = require('express');
+*/
+const router = require('express').Router();
 const User = require("../models/User");
-const Review = require('../models/Review');
+/*const Review = require('../models/Review'); */
 const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
 
 // @desc    Edit User
 // @route   PUT /users/edit
 // @access  User
+/*
 router.put('/edit', isAuthenticated, async (req, res, next) => {
     const userId = req.payload._id;
     const { email, hashedPassword, username, profileImage, country, city, contactInfo, description } = req.body; 
@@ -18,6 +22,24 @@ router.put('/edit', isAuthenticated, async (req, res, next) => {
         next(error);
     }
 });
+*/
+
+// Ruta corregida para la edición de usuario
+// @desc    Edit User
+// @route   PUT /users/edit/:userId
+// @access  User
+router.put('/edit', isAuthenticated, async (req, res, next) => {
+
+    const userId = req.params.userId; // Cambiado para obtener el userId de los parámetros de la ruta
+    const { email, hashedPassword, username, profileImage, country, city, contactInfo, description } = req.body; 
+    try {
+        const updatedUser = await User.findByIdAndUpdate(userId, { email, hashedPassword, username, profileImage, country, city, contactInfo, description }, { new: true });
+        res.status(202).json({ data: updatedUser });
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 // @desc    Delete User
 // @route   DELETE /users/delete

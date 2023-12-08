@@ -11,7 +11,7 @@ const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
 const knowledgeRouter = require('./routes/knowledges');
 const reviewRouter = require('./routes/reviews');
-const favoriteRouter = require('./routes/favorite')
+const favoriteRouter = require('./routes/favorite');
 
 const app = express();
 
